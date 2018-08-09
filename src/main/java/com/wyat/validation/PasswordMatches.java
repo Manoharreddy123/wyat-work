@@ -1,4 +1,4 @@
-/*package com.wyat.validation;
+package com.wyat.validation;
 
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.ElementType.TYPE;
@@ -24,4 +24,3 @@ public @interface PasswordMatches {
     Class<? extends Payload>[] payload() default {};
 
 }
-*/

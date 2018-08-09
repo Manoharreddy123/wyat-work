@@ -1,4 +1,4 @@
-/*package com.wyat.validation;
+package com.wyat.validation;
 
 import java.util.Arrays;
 
@@ -48,4 +48,3 @@ public class PasswordConstraintValidator implements ConstraintValidator<ValidPas
     }
 
 }
-*/

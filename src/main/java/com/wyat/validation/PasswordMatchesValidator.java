@@ -1,9 +1,10 @@
-/*package com.wyat.validation;
+package com.wyat.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.wyat.rest.dto.UserDto;
+
+import com.wyat.service.dto.UserDTO;
 
 public class PasswordMatchesValidator implements ConstraintValidator<PasswordMatches, Object> {
 
@@ -14,9 +15,8 @@ public class PasswordMatchesValidator implements ConstraintValidator<PasswordMat
 
     @Override
     public boolean isValid(final Object obj, final ConstraintValidatorContext context) {
-        final UserDto user = (UserDto) obj;
+        final UserDTO user = (UserDTO) obj;
         return user.getPassword().equals(user.getMatchingPassword());
     }
 
 }
-*/

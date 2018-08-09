@@ -1,194 +1,114 @@
 package com.wyat.service.dto;
 
-import java.io.Serializable;
-import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.wyat.dao.domain.Gender;
+import com.wyat.validation.PasswordMatches;
 import com.wyat.validation.ValidEmail;
+import com.wyat.validation.ValidPassword;
 
-public class UserDTO implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+@PasswordMatches
+public class UserDTO {
+    @NotNull
+    @Size(min = 1, message = "{Size.userDto.name}")
+    private String name;
 
-	private int userId;
-	private String emailId;
-	private String userName;
-	private Timestamp loginDate;
-	private String activeStatus;
-	private Timestamp createDate;
-	private String image;
-	private byte[] imageIcon;
-	private String notifications;
-	private String profileName;
-	private Set<ProfileSettingDTO> profileSettings = new HashSet<>();
+    
+    @ValidPassword
+    private String password;
+    
+    @NotNull
+    @Size(min = 1, message = "{Size.userDto.gender}")
+    private Gender gender;
 
-	public Set<ProfileSettingDTO> getProfileSettings() {
-		return profileSettings;
+    @NotNull
+    @Size(min = 1)
+    private String matchingPassword;
+    
+
+    @NotNull
+    @Size(min = 1, message = "{Size.userDto.phoneNuber}")
+    private Integer phoneNuber;
+
+    @ValidEmail
+    @NotNull
+    @Size(min = 1, message = "{Size.userDto.email}")
+    private String emailAddress;
+
+    private boolean isUsing2FA;
+
+   
+
+    public Gender getGender() {
+		return gender;
 	}
 
-	public void setProfileSettings(Set<ProfileSettingDTO> profileSettings) {
-		this.profileSettings = profileSettings;
+	public void setGender(Gender gender) {
+		this.gender = gender;
 	}
 
-	public byte[] getImageIcon() {
-		return imageIcon;
+	public String getEmailAddress() {
+		return emailAddress;
 	}
 
-	public void setImageIcon(byte[] imageIcon) {
-		this.imageIcon = imageIcon;
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
 	}
 
-	/**
-	 * Returns user id
-	 * 
-	 * @return
-	 */
-	public int getUserId() {
-		return userId;
+	private Integer role;
+
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(final Integer role) {
+        this.role = role;
+    }
+
+   
+    public String getName() {
+		return name;
 	}
 
-	/**
-	 * Sets user id
-	 * 
-	 * @param userId
-	 */
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	/**
-	 * Sets user email
-	 * 
-	 * @return
-	 */
-	public String getEmailId() {
-		return emailId;
+	public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(final String password) {
+        this.password = password;
+    }
+
+    public String getMatchingPassword() {
+        return matchingPassword;
+    }
+
+    public void setMatchingPassword(final String matchingPassword) {
+        this.matchingPassword = matchingPassword;
+    }
+
+    public boolean isUsing2FA() {
+        return isUsing2FA;
+    }
+
+    public void setUsing2FA(boolean isUsing2FA) {
+        this.isUsing2FA = isUsing2FA;
+    }
+
+	public Integer getPhoneNuber() {
+		return phoneNuber;
 	}
 
-	/**
-	 * Returns user email
-	 * 
-	 * @param emailId
-	 */
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
+	public void setPhoneNuber(Integer phoneNuber) {
+		this.phoneNuber = phoneNuber;
 	}
 
-	/**
-	 * Returns user created date
-	 * 
-	 * @return
-	 */
-	public Timestamp getLoginDate() {
-		return loginDate;
-	}
-
-	/**
-	 * Sets user role
-	 * 
-	 * @param loginDate
-	 */
-	public void setLoginDate(Timestamp loginDate) {
-		this.loginDate = loginDate;
-	}
-
-
-	/**
-	 * Returns user active status
-	 * 
-	 * @return
-	 */
-	public String getActiveStatus() {
-		return activeStatus;
-	}
-
-	/**
-	 * Sets user active status
-	 * 
-	 * @param activeStatus
-	 */
-	public void setActiveStatus(String activeStatus) {
-		this.activeStatus = activeStatus;
-	}
-
-	public Timestamp getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(Timestamp createDate) {
-		this.createDate = createDate;
-	}
-
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getNotifications() {
-		return notifications;
-	}
-
-	public void setNotifications(String notifications) {
-		this.notifications = notifications;
-	}
-
-	public String getProfileName() {
-		return profileName;
-	}
-
-	public void setProfileName(String profileName) {
-		this.profileName = profileName;
-	}
-
-	/*
-	 * @NotNull
-	 * 
-	 * @Size(min = 1, message = "{Size.userDto.firstName}") private String
-	 * firstName;
-	 * 
-	 * @NotNull
-	 * 
-	 * @Size(min = 1, message = "{Size.userDto.lastName}") private String lastName;
-	 * 
-	 * private String password;
-	 * 
-	 * @ValidEmail
-	 * 
-	 * @NotNull
-	 * 
-	 * @Size(min = 1, message = "{Size.userDto.email}") private String email;
-	 * 
-	 * public String getEmail() { return email; }
-	 * 
-	 * public void setEmail(final String email) { this.email = email; }
-	 * 
-	 * public String getFirstName() { return firstName; }
-	 * 
-	 * public void setFirstName(final String firstName) { this.firstName =
-	 * firstName; }
-	 * 
-	 * public String getLastName() { return lastName; }
-	 * 
-	 * public void setLastName(final String lastName) { this.lastName = lastName; }
-	 * 
-	 * public String getPassword() { return password; }
-	 * 
-	 * public void setPassword(final String password) { this.password = password; }
-	 */
+    
+   
 
 }

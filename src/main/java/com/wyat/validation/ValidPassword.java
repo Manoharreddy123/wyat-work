@@ -1,4 +1,4 @@
-/*package com.wyat.validation;
+package com.wyat.validation;
 
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.ElementType.FIELD;
@@ -25,4 +25,3 @@ public @interface ValidPassword {
     Class<? extends Payload>[] payload() default {};
 
 }
-*/

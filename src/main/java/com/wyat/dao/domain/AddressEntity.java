@@ -47,7 +47,7 @@ public class AddressEntity {
 	// Customer reference(Foreign Key) of the Address.
 	@OneToOne
 	@JoinColumn(name = "id_customer")
-	private CustomerEntity customer_id;
+	private User customer_id;
 	
 	/** @see #getModificationCounter() */
 	  @Version
@@ -172,14 +172,14 @@ public class AddressEntity {
 	/**
 	 * @return the customer_id
 	 */
-	public CustomerEntity getCustomer_id() {
+	public User getCustomer_id() {
 		return customer_id;
 	}
 
 	/**
 	 * @param customer_id the customer_id to set
 	 */
-	public void setCustomer_id(CustomerEntity customer_id) {
+	public void setCustomer_id(User customer_id) {
 		this.customer_id = customer_id;
 	}
 
@@ -210,6 +210,82 @@ public class AddressEntity {
 	public void setRevision(Number revision) {
 		this.revision = revision;
 	}
-	
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((address_id == null) ? 0 : address_id.hashCode());
+		result = prime * result + ((address_line1 == null) ? 0 : address_line1.hashCode());
+		result = prime * result + ((address_line2 == null) ? 0 : address_line2.hashCode());
+		result = prime * result + ((city == null) ? 0 : city.hashCode());
+		result = prime * result + ((country == null) ? 0 : country.hashCode());
+		result = prime * result + ((customer_id == null) ? 0 : customer_id.hashCode());
+		result = prime * result + modificationCounter;
+		result = prime * result + ((pincode == null) ? 0 : pincode.hashCode());
+		result = prime * result + ((state == null) ? 0 : state.hashCode());
+		result = prime * result + ((street == null) ? 0 : street.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AddressEntity other = (AddressEntity) obj;
+		if (address_id == null) {
+			if (other.address_id != null)
+				return false;
+		} else if (!address_id.equals(other.address_id))
+			return false;
+		if (address_line1 == null) {
+			if (other.address_line1 != null)
+				return false;
+		} else if (!address_line1.equals(other.address_line1))
+			return false;
+		if (address_line2 == null) {
+			if (other.address_line2 != null)
+				return false;
+		} else if (!address_line2.equals(other.address_line2))
+			return false;
+		if (city == null) {
+			if (other.city != null)
+				return false;
+		} else if (!city.equals(other.city))
+			return false;
+		if (country == null) {
+			if (other.country != null)
+				return false;
+		} else if (!country.equals(other.country))
+			return false;
+		if (customer_id == null) {
+			if (other.customer_id != null)
+				return false;
+		} else if (!customer_id.equals(other.customer_id))
+			return false;
+		if (modificationCounter != other.modificationCounter)
+			return false;
+		if (pincode == null) {
+			if (other.pincode != null)
+				return false;
+		} else if (!pincode.equals(other.pincode))
+			return false;
+		if (state == null) {
+			if (other.state != null)
+				return false;
+		} else if (!state.equals(other.state))
+			return false;
+		if (street == null) {
+			if (other.street != null)
+				return false;
+		} else if (!street.equals(other.street))
+			return false;
+		return true;
+	}
+	
+	
 }
