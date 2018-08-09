@@ -76,6 +76,36 @@
 			<version>1.11.133</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.jboss.aerogear/aerogear-otp-java -->
+		<dependency>
+			<groupId>org.jboss.aerogear</groupId>
+			<artifactId>aerogear-otp-java</artifactId>
+			<version>1.0.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.passay/passay -->
+		<dependency>
+			<groupId>org.passay</groupId>
+			<artifactId>passay</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.google.common/google-collect -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>20.0</version>
+		</dependency>
+
+
 	</dependencies>
 	<!-- <dependencyManagement> <dependencies> <dependency> <groupId>org.springframework.cloud</groupId> 
 		<artifactId>spring-cloud-dependencies</artifactId> <version>${spring-cloud.version}</version> 
