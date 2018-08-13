@@ -63,9 +63,9 @@ public class RegistrationController {
     @Autowired
     private Environment env;
 
-    @Autowired
+  /*  @Autowired
     private AuthenticationManager authenticationManager;
-
+*/
     public RegistrationController() {
         super();
     }

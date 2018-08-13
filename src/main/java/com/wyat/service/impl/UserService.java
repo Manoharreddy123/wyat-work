@@ -3,10 +3,8 @@ package com.wyat.service.impl;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -14,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -45,8 +42,8 @@ public class UserService implements IUserService {
     private PasswordEncoder passwordEncoder;
 
 
-    @Autowired
-    private SessionRegistry sessionRegistry;
+   /* @Autowired
+    private SessionRegistry sessionRegistry;*/
 
     public static final String TOKEN_INVALID = "invalidToken";
     public static final String TOKEN_EXPIRED = "expired";
@@ -200,9 +197,9 @@ public class UserService implements IUserService {
         return repository.findByEmailAddress(email) != null;
     }
 
-    @Override
+   /* @Override
     public List<String> getUsersFromSessionRegistry() {
         return sessionRegistry.getAllPrincipals().stream().filter((u) -> !sessionRegistry.getAllSessions(u, false).isEmpty()).map(Object::toString).collect(Collectors.toList());
-    }
+    }*/
 
 }

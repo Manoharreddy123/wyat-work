@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,6 +20,7 @@ import com.wyat.dao.repository.PasswordResetTokenRepository;
 
 @Service
 @Transactional
+@ImportResource({ "classpath:webSecurityConfig.xml" })
 public class UserSecurityService implements ISecurityUserService {
 
     @Autowired

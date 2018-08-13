@@ -1,7 +1,6 @@
 package com.wyat.service;
 
 import java.io.UnsupportedEncodingException;
-import java.util.List;
 import java.util.Optional;
 
 import com.wyat.dao.domain.PasswordResetToken;
@@ -47,6 +46,6 @@ public interface IUserService {
 
     User updateUser2FA(boolean use2FA);
 
-    List<String> getUsersFromSessionRegistry();
+    //List<String> getUsersFromSessionRegistry();
 
 }
