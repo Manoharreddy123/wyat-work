@@ -15,10 +15,10 @@ public class UserValidator implements Validator {
 
     @Override
     public void validate(final Object obj, final Errors errors) {
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "message.firstName", "Firstname is required.");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "message.lastName", "LastName is required.");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "message.password", "LastName is required.");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "message.username", "UserName is required.");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "message.name", "User Name is required.");
+     //   ValidationUtils.rejectIfEmptyOrWhitespace(errors, "gender", "message.gender", "Gender is required.");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "message.password", "Password is required.");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phoneNuber", "message.phoneNuber", "Phone Number is required.");
     }
 
 }

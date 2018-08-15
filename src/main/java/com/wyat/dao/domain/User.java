@@ -38,8 +38,8 @@ public class User {
 	@Column(length = 60)
 	private String password;
 
-	@Column(name = "phone_nuber")
-	private Integer phoneNuber;
+	@Column(name = "phone_number")
+	private String phoneNumber;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreationTimestamp
@@ -173,21 +173,6 @@ public class User {
 		this.password = password;
 	}
 
-	/**
-	 * @return the phoneNuber
-	 */
-	public Integer getPhoneNuber() {
-		return phoneNuber;
-	}
-
-	/**
-	 * @param phoneNuber
-	 *            the phoneNuber to set
-	 */
-	public void setPhoneNuber(Integer phoneNuber) {
-		this.phoneNuber = phoneNuber;
-	}
-
 	public Date getCreatedDate() {
 		return createdDate;
 	}
@@ -265,7 +250,7 @@ public class User {
 		result = prime * result + ((modifiedDate == null) ? 0 : modifiedDate.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((phoneNuber == null) ? 0 : phoneNuber.hashCode());
+		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
 		result = prime * result + ((secret == null) ? 0 : secret.hashCode());
 		return result;
 	}
@@ -323,10 +308,10 @@ public class User {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (phoneNuber == null) {
-			if (other.phoneNuber != null)
+		if (phoneNumber == null) {
+			if (other.phoneNumber != null)
 				return false;
-		} else if (!phoneNuber.equals(other.phoneNuber))
+		} else if (!phoneNumber.equals(other.phoneNumber))
 			return false;
 		if (secret == null) {
 			if (other.secret != null)
@@ -334,6 +319,16 @@ public class User {
 		} else if (!secret.equals(other.secret))
 			return false;
 		return true;
+	}
+
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	

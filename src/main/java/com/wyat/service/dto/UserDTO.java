@@ -11,8 +11,10 @@ import com.wyat.validation.ValidPassword;
 
 @PasswordMatches
 public class UserDTO {
+
+	
     @NotNull
-    @Size(min = 1, message = "{Size.userDto.name}")
+  //  @Size(min = 1, message = "{Size.userDto.name}")
     private String name;
 
     
@@ -20,7 +22,7 @@ public class UserDTO {
     private String password;
     
     @NotNull
-    @Size(min = 1, message = "{Size.userDto.gender}")
+//    @Size(min = 1, message = "{Size.userDto.gender}")
     private Gender gender;
 
     @NotNull
@@ -29,18 +31,17 @@ public class UserDTO {
     
 
     @NotNull
-    @Size(min = 1, message = "{Size.userDto.phoneNuber}")
-    private Integer phoneNuber;
+ //   @Size(min = 1, message = "{Size.userDto.phoneNuber}")
+    private @NotNull @Size(min = 1, message = "{Size.userDto.phoneNuber}") String phoneNuber;
 
     @ValidEmail
     @NotNull
-    @Size(min = 1, message = "{Size.userDto.email}")
-    private String emailAddress;
+//    @Size(min = 1, message = "{Size.userDto.email}")
+    private String email;
 
     private boolean isUsing2FA;
 
    
-
     public Gender getGender() {
 		return gender;
 	}
@@ -49,12 +50,12 @@ public class UserDTO {
 		this.gender = gender;
 	}
 
-	public String getEmailAddress() {
-		return emailAddress;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	private Integer role;
@@ -100,11 +101,11 @@ public class UserDTO {
         this.isUsing2FA = isUsing2FA;
     }
 
-	public Integer getPhoneNuber() {
+	public String getPhoneNuber() {
 		return phoneNuber;
 	}
 
-	public void setPhoneNuber(Integer phoneNuber) {
+	public void setPhoneNuber(String phoneNuber) {
 		this.phoneNuber = phoneNuber;
 	}
 

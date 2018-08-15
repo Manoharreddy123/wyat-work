@@ -1,6 +1,7 @@
 package com.wyat.rest.api;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Calendar;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -26,6 +27,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,7 +43,7 @@ import com.wyat.service.dto.UserDTO;
 import com.wyat.service.exception.InvalidOldPasswordException;
 import com.wyat.util.GenericResponse;
 
-@Controller
+@Controller(value="/user")
 public class RegistrationController {
     private final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
@@ -72,9 +74,9 @@ public class RegistrationController {
 
     // Registration
 
-    @RequestMapping(value = "/user/registration", method = RequestMethod.POST)
+    @RequestMapping(value = "/createAccount", method = RequestMethod.POST)
     @ResponseBody
-    public GenericResponse registerUserAccount(@Valid final UserDTO accountDto, final HttpServletRequest request) {
+    public GenericResponse registerUserAccount(@RequestBody @Valid final UserDTO accountDto, final HttpServletRequest request) {
         LOGGER.debug("Registering user account with information: {}", accountDto);
 
         final User registered = userService.registerNewUserAccount(accountDto);
@@ -82,8 +84,9 @@ public class RegistrationController {
         return new GenericResponse("success");
     }
 
-    @RequestMapping(value = "/registrationConfirm", method = RequestMethod.GET)
-    public String confirmRegistration(final HttpServletRequest request, final Model model, @RequestParam("token") final String token) throws UnsupportedEncodingException {
+    @RequestMapping(value = "/verifyEmailAccount", method = RequestMethod.GET)
+    @ResponseBody
+    public GenericResponse confirmRegistration(final HttpServletRequest request, @RequestParam("token") final String token) throws UnsupportedEncodingException {
         Locale locale = request.getLocale();
         final String result = userService.validateVerificationToken(token);
         if (result.equals("valid")) {
@@ -92,19 +95,14 @@ public class RegistrationController {
             // model.addAttribute("qr", userService.generateQRUrl(user));
             // return "redirect:/qrcode.html?lang=" + locale.getLanguage();
             // }
-            model.addAttribute("message", messages.getMessage("message.accountVerified", null, locale));
-            return "redirect:/console.html?lang=" + locale.getLanguage();
+            return new GenericResponse("Account Verified Successfully");
         }
-
-        model.addAttribute("message", messages.getMessage("auth.message." + result, null, locale));
-        model.addAttribute("expired", "expired".equals(result));
-        model.addAttribute("token", token);
-        return "redirect:/badUser.html?lang=" + locale.getLanguage();
+        return new GenericResponse("Token Expired.");
     }
 
     // user activation - verification
 
-    @RequestMapping(value = "/user/resendRegistrationToken", method = RequestMethod.GET)
+    @RequestMapping(value = "/resendToken", method = RequestMethod.GET)
     @ResponseBody
     public GenericResponse resendRegistrationToken(final HttpServletRequest request, @RequestParam("token") final String existingToken) {
         final VerificationToken newToken = userService.generateNewVerificationToken(existingToken);
@@ -114,7 +112,7 @@ public class RegistrationController {
     }
 
     // Reset password
-    @RequestMapping(value = "/user/resetPassword", method = RequestMethod.POST)
+    @RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
     @ResponseBody
     public GenericResponse resetPassword(final HttpServletRequest request, @RequestParam("email") final String userEmail) {
         final User user = userService.findUserByEmail(userEmail);
@@ -124,9 +122,10 @@ public class RegistrationController {
             mailSender.send(constructResetTokenEmail(getAppUrl(request), request.getLocale(), token, user));
         }
         return new GenericResponse(messages.getMessage("message.resetPasswordEmail", null, request.getLocale()));
+       
     }
 
-    @RequestMapping(value = "/user/changePassword", method = RequestMethod.GET)
+    @RequestMapping(value = "/changePassword", method = RequestMethod.GET)
     public String showChangePasswordPage(final Locale locale, final Model model, @RequestParam("id") final long id, @RequestParam("token") final String token) {
         final String result = securityUserService.validatePasswordResetToken(id, token);
         if (result != null) {

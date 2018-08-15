@@ -24,6 +24,7 @@ import com.wyat.dao.repository.VerificationTokenRepository;
 import com.wyat.service.IUserService;
 import com.wyat.service.dto.UserDTO;
 import com.wyat.service.exception.UserAlreadyExistException;
+import com.wyat.util.UserServiceUtil;
 
 @Service
 @Transactional
@@ -54,21 +55,15 @@ public class UserService implements IUserService {
 
     // API
 
-    @Override
-    public User registerNewUserAccount(final UserDTO accountDto) {
-        if (emailExist(accountDto.getEmailAddress())) {
-            throw new UserAlreadyExistException("There is an account with that email adress: " + accountDto.getEmailAddress());
-        }
-        final User user = new User();
-
-        //user.setFirstName(accountDto.g());
-        //user.setLastName(accountDto.getLastName());
-        //user.setPassword(passwordEncoder.encode(accountDto.getPassword()));
-        //user.setEmail(accountDto.getEmail());
-        //user.setUsing2FA(accountDto.isUsing2FA());
-        //user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_USER")));
-        return repository.save(user);
-    }
+	@Override
+	public User registerNewUserAccount(final UserDTO accountDto) {
+		if (emailExist(accountDto.getEmail())) {
+			throw new UserAlreadyExistException("There is an account with that email adress: " + accountDto.getEmail());
+		}
+		// UI Mapper
+		final User user = UserServiceUtil.convertDtoObjectTODao(accountDto);
+		return repository.save(user);
+	}
 
     @Override
     public User getUser(final String verificationToken) {
